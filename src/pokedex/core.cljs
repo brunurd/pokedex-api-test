@@ -1,16 +1,15 @@
 (ns pokedex.core
-  (:require [reagent.core :as r]))
-
-(defn hello-world []
-  [:ul 
-   (map (fn [item]
-          ^{:key item} [:li]) [0 1 2])])
+  (:require 
+   [reagent.core :as r]
+   [pokedex.db.core :as db]
+   [pokedex.components.main :refer (main)]))
 
 (defn start []
-  (r/render-component [hello-world]
-                            (. js/document (getElementById "app"))))
+  (r/render-component [main]
+                      (. js/document (getElementById "app"))))
 
 (defn ^:export init []
+  (db/init)
   (start))
 
 (defn stop []
